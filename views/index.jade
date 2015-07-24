@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  link(rel='stylesheet', href='jquery-dynatable/jquery.dynatable.css')
+  script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
+  script(src='jquery-dynatable/jquery.dynatable.js')
+  script(src='javascripts/LoadTable.js')
+  h1 #{subtitle}
+
+  table.datatable
+    thead
+      tr
+        th Signature
+        th Category
+        th DateTime
+        th Application
+        th Risk
+        th Threads
+        th ApplicationName
+        th Link
+    tbody
+      - var items = data
+      - var uselessColumns = [2,3,4,7,9,12,14,15,16]
+      - each item in items
+        tr
+          - each column, index in item
+            if  uselessColumns.indexOf(index) == -1
+              if index == 13
+                td(class="url")= column
+              else
+                td= column
